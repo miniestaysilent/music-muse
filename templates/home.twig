@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ website_name }}</title>
+    <!-- <title>Music Muse</title> -->
+    <link rel="icon" type="image/png" href="{{ asset('assets/logos/clef-logo-red') }}">
+    <link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.3.0/dist/css/coreui.min.css" rel="stylesheet">
+</head>
+<body>
+    {% include 'navigation.twig' %}
+
+    <main>
+        <div class="banner">
+            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=2000&q=80"
+                 alt="Music Banner" class="banner-image">
+        </div>
+        <div class="album-recommendation">
+            <h1>Today's Album Recommendation</h1>
+            <div class="album-container">
+                <div class="album-image">
+                    <img src="https://images.unsplash.com/photo-1619983081593-e2ba5b543168?auto=format&fit=crop&q=80"
+                         alt="Album Cover">
+                </div>
+                <div class="album-info">
+                    <h3 id="album-rec-name">
+                        <!-- <a href="{{ path('album_details', {'albumId': recommended_album.id}) }}" class="album-title-link">
+                            {{ recommended_album.title }} {# Pass album data as 'recommended_album' #}
+                        </a> -->
+                        Album Name
+                    </h3>
+                    <p id="artist-rec-name">{{ recommended_album.artist }}</p> {#Pass artist data #}
+                    <div class="rating">
+                        <div data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="{{ recommended_album.rating }}">
+                            <span class="rating-star"></span>
+                            <span class="rating-star"></span>
+                            <span class="rating-star"></span>
+                            <span class="rating-star"></span>
+                            <span class="rating-star"></span>
+                        </div>
+                    </div>
+                    <div class="tracklist">
+                        <ol>
+                            {% for track in recommended_album.tracks %} {# Pass tracklist data #}
+                                <li class="song-name">{{ track.name }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="login.twig">Login</a>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.3.0/dist/js/coreui.bundle.min.js"></script>
+    <script src="{{ asset('script.js') }}"></script>
+</body>
+</html>

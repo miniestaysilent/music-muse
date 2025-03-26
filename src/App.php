@@ -1,5 +1,5 @@
 <?php
-namespace TeamCherry\MusicMuse\;
+namespace TeamCherry\MusicMuse;
 # Namespace can be found in composer.json
 
 use Dotenv\Dotenv;

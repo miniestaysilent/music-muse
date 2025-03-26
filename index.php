@@ -30,6 +30,5 @@ echo $template -> render( [
     'website_name' => $site_name,
 //     // 'items' => $items
 ] );
-
-echo "Hello World";
+;
 ?>
