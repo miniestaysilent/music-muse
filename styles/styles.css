@@ -1,0 +1,307 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-left,
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .website-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .nav-link:hover {
+    color: #666;
+  }
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    width: 200px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    color: #666;
+  }
+  
+  .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .banner {
+    width: 100%;
+    height: calc(100vh - 75px);
+    /* Adjust 75px to match navbar height if needed */
+    overflow: hidden;
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .about-container {
+    display: flex;
+    height: calc(100vh - 75px);
+    margin: 0;
+  }
+  
+  .about-image {
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .about-content {
+    width: 60%;
+    padding: 2rem;
+  }
+  
+  .about-content h1 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .album-recommendation {
+    width: 60%;
+    margin: 3rem auto;
+  }
+  
+  .album-recommendation h1 {
+    margin-bottom: 2rem;
+  }
+  
+  .album-container {
+    display: flex;
+    gap: 2rem;
+    /* Remove align-items: center; */
+    margin-bottom: 2rem; /* Add some space below the album info */
+  }
+  
+  .album-image {
+    width: 300px; /* Adjust image width for details page */
+    height: 300px; /* Adjust image height for details page */
+    /* Add flex-shrink to prevent image from shrinking */
+    flex-shrink: 0;
+  }
+  
+  .album-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .album-info {
+    padding-top: 0;
+    /* Add flex-grow to allow info to take remaining space */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+  }
+  
+  .album-info h3#album-name,
+  .album-info p#artist-name {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #333;
+  }
+  
+  .album-info p#artist-name {
+    font-size: 1.8rem;
+    color: #666;
+    margin-top: 0;
+  }
+  
+  .rating {
+    font-size: 1.1rem;
+    margin-bottom: 1rem; /* Add some space below the rating */
+  }
+  
+  .tracklist {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .tracklist ol {
+    padding-left: 1.5rem;
+  }
+  
+  /* Album Details Page Specific Styles */
+  .album-details-page {
+    padding: 2rem;
+  }
+  
+  .album-details-container {
+    max-width: 960px; /* Adjust max width as needed */
+    margin: 0 auto;
+  }
+  
+  .album-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    align-items: center; /* Vertically align artist details and genres */
+  }
+  
+  .artist-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .artist-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent image from shrinking */
+  }
+  
+  .artist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .artist-name-meta {
+    font-weight: bold;
+  }
+  
+  .genres {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .genre-tag {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .reviews {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .reviews h2 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Profile Dropdown Styles (moved here for clarity) */
+  .profile-container {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .profile-container .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .profile-container .dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .profile-container .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .profile-container:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Login/Signup Styles (moved here for clarity) */
+  .login-container,
+  .signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+    /* Centers the box vertically */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
