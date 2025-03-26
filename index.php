@@ -1,6 +1,6 @@
 <?php 
 
-// require_once "vendor/autoload.php";
+require_once "vendor/autoload.php";
 // // // Classes used on this page
 // // use Syeda\Classproject\App;
 // // use Syeda\Classproject\Book;
@@ -18,18 +18,18 @@
 // // $page_title = "$site_name Music Muse";
 // // $greeting = "Welcome to $site_name";
 
-// // Loading the twig template
-// $loader = new \Twig\Loader\FilesystemLoader('templates');
-// $twig = new \Twig\Environment( $loader );
-// $template = $twig -> load( 'home.twig' );
+// Loading the twig template
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment( $loader );
+$template = $twig -> load( 'home.twig' );
 
 // // Render the ouput
-// echo $template -> render( [ 
+echo $template -> render( [ 
 //     // 'title' => $page_title, 
 //     // 'greeting' => $greeting,
-//     'website_name' => $site_name,
+    'website_name' => $site_name,
 //     // 'items' => $items
-// ] );
+] );
 
 echo "Hello World";
 ?>
