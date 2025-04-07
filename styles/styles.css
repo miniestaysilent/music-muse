@@ -1,45 +1,74 @@
-body {
+:root{
+  --wine-red: #460618;
+  /* --ballet-pink:#d0afab; */
+  
+  --ballet-pink:#f4bdc4;
+}
+
+.sulphur-point-light {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.sulphur-point-regular {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sulphur-point-bold {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body,p,a,h1,h2,h3 {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Sulphur Point", sans-serif;
   }
   
   .navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1rem 2rem;
+    background: var(--wine-red);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--ballet-pink);
+    font-size: 20px;
+    max-height: fit-content; 
+    box-sizing: border-box;
   }
-  
+
   .nav-left,
   .nav-right {
     display: flex;
     align-items: center;
+    
+  }
+
+  .nav-left{
     gap: 1.5rem;
+  }
+
+  .nav-right{
+    gap: 10rem;
   }
   
   .logo {
-    width: 40px;
-    height: 40px;
+    height: 10vh;
     object-fit: cover;
-    border-radius: 50%;
   }
   
   .website-name {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--ballet-pink);
   }
   
   .nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--ballet-pink);
     font-weight: 500;
-  }
-  
-  .nav-link:hover {
-    color: #666;
   }
   
   .search-container {
@@ -52,20 +81,22 @@ body {
     padding: 0.5rem 2rem 0.5rem 1rem;
     border: 1px solid #ddd;
     border-radius: 20px;
-    width: 200px;
+    width: 45vw;
+    font-size: 14px;
   }
   
   .search-icon {
     position: absolute;
     right: 10px;
-    color: #666;
+    color: var(--wine-red);
   }
   
   .profile-pic {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
+    margin: 0 1rem;
   }
   
   .banner {
@@ -238,38 +269,45 @@ body {
     margin-bottom: 1rem;
   }
   
-  /* Profile Dropdown Styles (moved here for clarity) */
   .profile-container {
     position: relative;
     cursor: pointer;
   }
   
   .profile-container .dropdown-content {
-    display: none;
+    display: block;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
     position: absolute;
     right: 0;
     top: 100%;
-    background-color: #ffffff;
+    background-color: var(--wine-red);
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    border-radius: 4px;
     margin-top: 5px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
   
+  /* Fade and slide-down effect */
+  .profile-container:hover .dropdown-content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
+  /* Fade hover on links */
   .profile-container .dropdown-content a {
-    color: #333;
+    padding-top: 15px;
+    color: var(--ballet-pink);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .profile-container .dropdown-content a:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .profile-container:hover .dropdown-content {
-    display: block;
+    background-color: var(--ballet-pink);
+    color: var(--wine-red);
   }
   
   /* Login/Signup Styles (moved here for clarity) */
@@ -304,4 +342,66 @@ body {
   .button-group {
     display: flex;
     justify-content: space-between;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within elements */
+    padding: 5px; /* Add some padding around the footer content */
+    background-color: var(--wine-red); /* Optional: Add a background color */
+    border-top: 1px solid #eee; /* Optional: Add a top border for separation */
+  }
+  
+  .social-buttons {
+    display: flex; /* Arrange buttons horizontally */
+    gap: 15px; /* Space out the buttons */
+    margin-bottom: 10px; /* Add some space between buttons and copyright */
+  }
+  
+  .social-button {
+    background-color: var(--wine-red); /* Default button background */
+    color: var(--ballet-pink); /* Default button text/icon color */
+    border: none;
+    border-radius: 50%; /* Make them circular */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    font-size: 20px; /* Adjust icon size */
+    display: flex;
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Optional: Add hover effect */
+  }
+  
+  .social-button:hover {
+    background-color: var(--ballet-pink);
+    color: var(--wine-red);
+  }
+  
+  /* .social-button.instagram {
+    background-color: #e1306c;
+    color: white;
+  }
+  
+  .social-button.x {
+    background-color: #000;
+    color: white;
+  }
+  
+  .social-button.tiktok {
+    background-color: #000;
+    color: white;
+  }
+  
+  .social-button.email {
+    background-color: #dd4b39;
+    color: white;
+  } */
+  
+  .copyright {
+    font-size: 0.9rem;
+    color: var(--ballet-pink);
+    margin-top: 0;
   }

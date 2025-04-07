@@ -1,20 +1,23 @@
-<?php 
-
+<?php
 require_once "vendor/autoload.php";
-// // // Classes used on this page
-// // use Syeda\Classproject\App;
-// // use Syeda\Classproject\Book;
 
-// // Create app from App class
-// // $app = new App();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-// // Get items from database
-// // $book = new Book();
-// // $items = $book -> get();
+// Classes used on this page
+use TeamCherry\MusicMuse\App;
+// // use TeamCherry\MusicMuse\Album;
+
+// Create app from App class
+$app = new App();
+
+// Get items from database
+// $book = new Book();
+// $items = $book -> get();
 
 // // $site_name = $app -> site_name;
-// // // Create data variables
-// $site_name = "Music Muse"
+// // Create data variables
+$site_name = "Music Muse";
 // // $page_title = "$site_name Music Muse";
 // // $greeting = "Welcome to $site_name";
 
@@ -30,5 +33,4 @@ echo $template -> render( [
     'website_name' => $site_name,
 //     // 'items' => $items
 ] );
-;
 ?>

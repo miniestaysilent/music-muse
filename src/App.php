@@ -6,7 +6,6 @@ use Dotenv\Dotenv;
 use \Exception;
 
 class App{
-    # In php, all variables start with '$'
     protected $config;
     public $site_name;
 
@@ -30,6 +29,6 @@ class App{
         }
     }
 }
-
 ?>
+
 
