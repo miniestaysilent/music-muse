@@ -12,7 +12,7 @@ class Validator {
     }
 
     public static function validatePassword($password){
-        if(strlen($password) >= 8){
+        if (strlen($password) <= 8 ) {
             return true;
         }
         else{
@@ -21,4 +21,3 @@ class Validator {
     }
 }
 ?>
-

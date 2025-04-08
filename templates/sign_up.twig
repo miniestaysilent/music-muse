@@ -17,7 +17,7 @@
     {% include 'navigation.twig' %}
   <div class="signup-container">
     <h1>Sign Up</h1>
-    <form>
+    <form method="post" action="/sign_up.php" novalidate>
         <div class="input-group">
             <label for="email">Email</label>
             <input type="text" id="email" name="email" required>
@@ -35,11 +35,25 @@
         <input type="password" id="confirm-password" name="confirm-password" required>
       </div>
       <div class="input-group">
-        <input type="checkbox" id="terms" name="terms">
-        <label for="stay_signed_in">I have read and agree to the Terms and Conditions</label>
+        <label for="accept_terms">I have read and agree to the Terms and Conditions</label>
+        <input type="checkbox" id="accept_terms" name="accept_terms">
       </div>
-      <p>Already have an account?</p>
-      <div class="button-group">
+      {% if errors %}
+      <div class="alert alert-danger">
+          {% for key, message in errors %}
+              <p><strong>{{ key|capitalize }}:</strong> {{ message }}</p>
+          {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if signup_success %}
+          <div class="alert alert-success">
+              <p>Signup successful! You can now <a href="login.php">log in</a>.</p>
+          </div>
+      {% endif %}
+
+  <p>Already have an account?</p>
+  <div class="button-group">
         <button type="button" onclick="window.location.href='login.php'">Login</button>
         <button type="submit">Sign Up</button>  
     </div>
