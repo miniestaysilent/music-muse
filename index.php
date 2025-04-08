@@ -10,15 +10,16 @@ use TeamCherry\MusicMuse\App;
 
 // Create app from App class
 $app = new App();
+$site_name = $app -> site_name;
 
 // Get items from database
 // $book = new Book();
 // $items = $book -> get();
 
-// // $site_name = $app -> site_name;
+
 // // Create data variables
-$site_name = "Music Muse";
-// // $page_title = "$site_name Music Muse";
+// $site_name = "Music Muse";
+$page_title = "$site_name | Home";
 // // $greeting = "Welcome to $site_name";
 
 // Loading the twig template
