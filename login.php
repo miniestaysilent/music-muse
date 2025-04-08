@@ -1,20 +1,24 @@
 <?php
 require_once "vendor/autoload.php";
 
+// Classes used on this page
 use TeamCherry\MusicMuse\App;
 
+// Create app from App class
 $app = new App();
+$site_name = $app -> site_name;
 
 // Create data variables
-$site_name = "Music Muse";
+$page_title = $site_name . "|". "Login";
 
 // Loading the twig template
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment( $loader );
 $template = $twig -> load( 'login.twig' );
 
-// // Render the ouput
+// Render the ouput
 echo $template -> render( [ 
-        'website_name' => $site_name,
-    ] );
+    'title' => $page_title,
+    'website_name' => $site_name
+] );
 ?>
