@@ -17,10 +17,10 @@
     {% include 'navigation.twig' %}
   <div class="login-container">
     <h1>Log In</h1>
-    <form>
+    <form method="post" action="/login.php" novalidate>
       <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
       </div>
       <div class="input-group">
         <label for="password">Password</label>
@@ -32,7 +32,6 @@
       </div>
       <p>Don't have an account?</p>
       <div class="button-group">
-        
         <button type="button" onclick="window.location.href='sign_up.php'">Sign Up</button>
         <button type="submit">Log In</button>
       </div>

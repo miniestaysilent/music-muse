@@ -67,8 +67,14 @@ class Account extends Database {
         // Implement update logic here
     }
 
-    public function getAccount() {
-        // Implement getAccount logic here
+    // For Log in
+    public function getAccountByEmail($email) {
+        $query = 'SELECT * FROM Account WHERE email = ?';
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 
     public function deactivate() {

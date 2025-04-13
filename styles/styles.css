@@ -437,10 +437,10 @@ body,p,a,h1,h2,h3 {
   margin: 0.5rem 0;
 }
 
-.email, .join-date {
+/* .email, .join-date {
   color: #666;
   margin: 0.5rem 0;
-}
+} */
 
 .profile-buttons {
   display: flex;
