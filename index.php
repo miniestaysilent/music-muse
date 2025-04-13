@@ -6,7 +6,7 @@ $dotenv->load();
 
 // Classes used on this page
 use TeamCherry\MusicMuse\App;
-// // use TeamCherry\MusicMuse\Album;
+use TeamCherry\MusicMuse\Album;
 
 // Create app from App class
 $app = new App();
@@ -17,10 +17,9 @@ $site_name = $app -> site_name;
 // $items = $book -> get();
 
 
-// // Create data variables
-// $site_name = "Music Muse";
+// Create data variables
+$site_name = "Music Muse";
 $page_title = "$site_name | Home";
-// // $greeting = "Welcome to $site_name";
 
 // Loading the twig template
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -29,9 +28,8 @@ $template = $twig -> load( 'home.twig' );
 
 // // Render the ouput
 echo $template -> render( [ 
-//     // 'title' => $page_title, 
-//     // 'greeting' => $greeting,
+    'title' => $page_title, 
     'website_name' => $site_name,
-//     // 'items' => $items
+    // 'items' => $items
 ] );
 ?>
