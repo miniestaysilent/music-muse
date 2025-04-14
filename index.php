@@ -11,15 +11,18 @@ use TeamCherry\MusicMuse\Album;
 // Create app from App class
 $app = new App();
 $site_name = $app -> site_name;
-
-// Get items from database
-// $book = new Book();
-// $items = $book -> get();
-
-
-// Create data variables
-$site_name = "Music Muse";
+$albumModel = new Album();
+// $site_name = "Music Muse";
 $page_title = "$site_name | Home";
+
+// Gets all albums from the database
+$albums = $albumModel->getAllAlbums();
+
+// Generate the HTML for the album cards
+$albumCardsHtml = '';
+foreach ($albums as $album) {
+    $albumCardsHtml .= Album::getAlbumCard($album); // Use the static method
+}
 
 // Loading the twig template
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -30,6 +33,6 @@ $template = $twig -> load( 'home.twig' );
 echo $template -> render( [ 
     'title' => $page_title, 
     'website_name' => $site_name,
-    // 'items' => $items
+    'album_cards' => $albumCardsHtml,
 ] );
 ?>

@@ -12,7 +12,6 @@ class Album extends Database
         parent::__construct();
     }
 
-
     private static function getArtistName(int $album_id): ?string
     {
         $instance = new self();
@@ -62,7 +61,7 @@ class Album extends Database
             $row = $result->fetch_assoc();
             return 'assets/album_covers/' . $row['cover_image'];
         }
-        return 'assets/album_covers/default.jpg'; // Default 
+        return 'assets/album_covers/default.jpg'; // Default
     }
 
     private static function getTrackList(int $album_id): array
@@ -89,7 +88,7 @@ class Album extends Database
         return $tracks;
     }
 
-    // Gets the Average rating 
+    // Gets the Average rating
     public function getAvgRating(int $album_id): ?int
     {
         $rating_query = "
@@ -112,7 +111,7 @@ class Album extends Database
     }
 
     // Display the star rating
-    private static function renderStarRating(int $rating): string
+    public static function renderStarRating(int $rating): string
     {
         $stars = '';
         for ($i = 1; $i <= 5; $i++) {
@@ -127,7 +126,7 @@ class Album extends Database
 
     public static function getArtist(int $album_id): ?string
     {
-        $instance = new self(); //Access the connection
+        $instance = new self(); //Access the connection.  This is correct, but not needed for every static method.
         $get_artist_query = "
             SELECT
                 Artist.artist_name
@@ -179,34 +178,70 @@ class Album extends Database
     }
 
 
-    // Add function to get an array of the genres
-
     // Creates a clickable album card that navigates to the respective details page
+
     public static function getAlbumCard(array $albumData): string
     {
-        $albumId = $albumData['album_id'] ?? null; // Assuming your $albumData has 'album_id'
-        $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/images/default_cover.png';
+        $albumId = $albumData['album_id'] ?? null;
+        $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/album_covers/default.jpg';
+        $albumTitle = isset($albumData['album_title']) ? htmlspecialchars($albumData['album_title']) : 'Unknown Album';
         $artistName = isset($albumData['artist_name']) ? htmlspecialchars($albumData['artist_name']) : 'Unknown Artist';
         $releaseYear = isset($albumData['release_date']) ? htmlspecialchars(date('Y', strtotime($albumData['release_date']))) : 'Unknown Year';
         $starRating = self::renderStarRating(0);
-    
-        $html = '<div class="album-card">';
+
+        $html = '<div class="col-12 col-md-6 col-lg-4">'; 
+        $html .= '<div class="card mb-4">';
+
         if ($albumId) {
-            $html .= '<a href="/album/' . htmlspecialchars($albumId) . '">'; // Link to the details page
-            $html .= '<img src="' . $coverImage . '" alt="' . htmlspecialchars($albumData['album_title'] ?? 'Album Cover') . '" class="album-cover">';
+            $html .= '<a href="/album/' . htmlspecialchars($albumId) . '" class="stretched-link">';
+            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
             $html .= '</a>';
         } else {
-            $html .= '<img src="' . $coverImage . '" alt="' . htmlspecialchars($albumData['album_title'] ?? 'Album Cover') . '" class="album-cover">';
+            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
         }
-        $html .= '<div class="album-details">';
+
+        $html .= '<div class="card-body">';
+        $html .= '<h5 class="card-title">' . $albumTitle . ' | (' . $releaseYear . ')</h5>';
+        $html .= '<p class="card-text"><small class="text-muted">' . $artistName . '</small></p>';
         $html .= '<div class="star-rating">' . $starRating . '</div>';
-        $html .= '<p class="artist-name">' . $artistName . '</p>';
-        $html .= '<p class="release-year">' . $releaseYear . '</p>';
         $html .= '</div>';
         $html .= '</div>';
-    
+        $html .= '</div>';
+
         return $html;
     }
+
+
+    // public static function getAlbumCard(array $albumData): string
+    // {
+    //     $albumId = $albumData['album_id'] ?? null;
+    //     $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/album_covers/default.jpg';
+    //     $albumTitle = isset($albumData['album_title']) ? htmlspecialchars($albumData['album_title']) : 'Unknown Album';
+    //     $artistName = isset($albumData['artist_name']) ? htmlspecialchars($albumData['artist_name']) : 'Unknown Artist';
+    //     $releaseYear = isset($albumData['release_date']) ? htmlspecialchars(date('Y', strtotime($albumData['release_date']))) : 'Unknown Year';
+    //     // $starRating = self::renderStarRating(getAvgRating($albumId));
+    //     $starRating = self::renderStarRating(0);
+
+    //     $html = '<div class="card mb-2">';
+
+    //     if ($albumId) {
+    //         $html .= '<a href="/album/' . htmlspecialchars($albumId) . '">'; // Link to details page
+    //         $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
+    //         $html .= '</a>';
+    //     } else {
+    //         $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
+    //     }
+
+
+    //     $html .= '<div class="card-body">';
+    //     $html .= '<h5 class="card-title">' . $albumTitle .  ' | (' . $releaseYear .')</h5>';
+    //     $html .= '<p class="card-text"><small class="text-muted">' . $artistName . '</small></p>';
+    //     $html .= '<div class="star-rating">' . $starRating . '</div>'; //added the star rating
+    //     $html .= '</div>';
+    //     $html .= '</div>';
+
+    //     return $html;
+    // }
 
     //In this version this function selects a random album
     private static function getRecommendedAlbum(): ?array
@@ -221,19 +256,19 @@ class Album extends Database
         if ($total_albums > 0) {
             $random_offset = rand(0, $total_albums - 1);
             $random_album_query = "
-            SELECT
-                Album.album_id AS album_id,
-                Album.album_title AS album_title,
-                Album.artist_id AS artist_id,
-                Artist.artist_name AS artist_name,
-                Album.release_date AS release_date,
-                Album.cover_image AS cover_image
-            FROM
-                `Album`
-            INNER JOIN Artist ON Album.artist_id = Artist.artist_id
-            WHERE Album.visible = 1
-            LIMIT 1 OFFSET ?
-        ";
+                SELECT
+                    Album.album_id AS album_id,
+                    Album.album_title AS album_title,
+                    Album.artist_id AS artist_id,
+                    Artist.artist_name AS artist_name,
+                    Album.release_date AS release_date,
+                    Album.cover_image AS cover_image
+                FROM
+                    `Album`
+                INNER JOIN Artist ON Album.artist_id = Artist.artist_id
+                WHERE Album.visible = 1
+                LIMIT 1 OFFSET ?
+            ";
             $statement = $instance->connection->prepare($random_album_query);
             $statement->bind_param("i", $random_offset);
             $statement->execute();
@@ -244,4 +279,35 @@ class Album extends Database
         }
         return null;
     }
+
+    public function getDetail(int $albumId): ?array
+    {
+        $query = "
+            SELECT
+                Album.album_id AS album_id,
+                Album.album_title AS album_title,
+                Album.release_date AS release_date,
+                Album.cover_image AS cover_image,
+                Artist.artist_name AS artist_name
+            FROM
+                Album
+            INNER JOIN Artist ON Album.artist_id = Artist.artist_id
+            WHERE
+                Album.album_id = ?
+        ";
+
+        $statement = $this->connection->prepare($query);
+        $statement->bind_param("i", $albumId);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $albumData = $result->fetch_assoc();
+            return $albumData;
+        } else {
+            return null;
+        }
+    }
+
+    // Add function to get an array of the genres
 }
