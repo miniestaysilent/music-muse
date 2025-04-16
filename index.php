@@ -4,7 +4,6 @@ require_once "vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Classes used on this page
 use TeamCherry\MusicMuse\App;
 use TeamCherry\MusicMuse\Album;
 

@@ -49,23 +49,30 @@
             </div>
             <div class="artist-genre-container">
                 <div class="artist-info">
-                    <img class="artist-image" src="/assets/icons/profile-icon.jpg">
-                    <h2 class="artist-name">Artist Name</h2>
+                    <img class="artist-image" src="/assets/artists/{{ artist.artist_image }}">
+                    <h2 class="artist-name">{{ artist.artist_name }}</h2>
                 </div>
                 <div class="genre-container">
-                    <div class="genre-card">
-                        Genre
-                    </div>
-                    <div class="genre-card">
-                        Genre
-                    </div>
-                    <div class="genre-card">
-                        Genre
-                    </div>
+                    {% for genre in genres %}
+                        <div class="genre-card">
+                            {{ genre.name }}
+                        </div>
+                    {% endfor %}
                 </div>
                 
+    
             </div>
         </div>
+        <div class="reviews-container">
+            <hr>
+            <h1>Reviews</h1>
+            <form class="review-form" method="post" action="/submit_review.php">
+              <label for="user-review">Leave a review:</label>
+              <textarea id="user-review" name="review" placeholder="Write your thoughts..." required></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+          
     </main>
 
     {% include 'footer.twig' %}

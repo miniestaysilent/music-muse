@@ -61,7 +61,7 @@ class Album extends Database
             $row = $result->fetch_assoc();
             return 'assets/album_covers/' . $row['cover_image'];
         }
-        return 'assets/album_covers/default.jpg'; // Default
+        return 'assets/album_covers/default.png'; // Default
     }
 
     private static function getTrackList(int $album_id): array
@@ -89,11 +89,11 @@ class Album extends Database
     }
 
     // Gets the Average rating
-    public function getAvgRating(int $album_id): ?int
+    public function getAvgRating(int $album_id): ?float
     {
         $rating_query = "
             SELECT AVG(star_rating) AS average_rating
-            FROM reviews
+            FROM Review
             WHERE album_id = ?
         ";
         $statement = $this->connection->prepare($rating_query);
@@ -110,23 +110,30 @@ class Album extends Database
         return 0;
     }
 
-    // Display the star rating
-    public static function renderStarRating(int $rating): string
+    public static function renderStarRating(float $rating): string
     {
-        $stars = '';
-        for ($i = 1; $i <= 5; $i++) {
-            if ($i <= $rating) {
-                $stars .= '<span class="fa fa-star checked"></span>';
-            } else {
-                $stars .= '<span class="fa fa-star"></span>';
-            }
+        $maxRating = 5;
+        $fullStars = floor($rating);
+        $emptyStars = $maxRating - $fullStars;
+    
+        $html = '<div class="star-rating">';
+        // Full stars
+        for ($i = 0; $i < $fullStars; $i++) {
+            $html .= '<span class="star full-star">&#9733;</span>';
         }
-        return $stars;
+
+        // Empty stars
+         for ($i = 0; $i < $emptyStars; $i++) {
+            $html .= '<span class="star empty-star">&#9734;</span>';
+        }
+        $html .= '</div>';
+        return $html;
     }
+    
 
     public static function getArtist(int $album_id): ?string
     {
-        $instance = new self(); //Access the connection.  This is correct, but not needed for every static method.
+        $instance = new self(); 
         $get_artist_query = "
             SELECT
                 Artist.artist_name
@@ -183,65 +190,35 @@ class Album extends Database
     public static function getAlbumCard(array $albumData): string
     {
         $albumId = $albumData['album_id'] ?? null;
-        $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/album_covers/default.jpg';
+        $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/album_covers/default.png';
         $albumTitle = isset($albumData['album_title']) ? htmlspecialchars($albumData['album_title']) : 'Unknown Album';
         $artistName = isset($albumData['artist_name']) ? htmlspecialchars($albumData['artist_name']) : 'Unknown Artist';
         $releaseYear = isset($albumData['release_date']) ? htmlspecialchars(date('Y', strtotime($albumData['release_date']))) : 'Unknown Year';
-        $starRating = self::renderStarRating(0);
-
-        $html = '<div class="col-12 col-md-6 col-lg-4">'; 
-        $html .= '<div class="card mb-4">';
-
+        $starRating = self::renderStarRating(3.5);
+    
+        $html = '<div class="col-12 col-md-6 col-lg-4">';
+        $html .= '<div class="card mb-1 border-0">';
+    
         if ($albumId) {
-            $html .= '<a href="/album/' . htmlspecialchars($albumId) . '" class="stretched-link">';
-            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
+            $html .= '<a href="/details.php?id=' . htmlspecialchars($albumId) . '" class="stretched-link">'; // Dynamic link takes user to the respective details page
+            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top rounded-0" alt="' . $albumTitle . '">'; 
             $html .= '</a>';
         } else {
-            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
+            $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top rounded-0" alt="' . $albumTitle . '">';
         }
-
+    
         $html .= '<div class="card-body">';
-        $html .= '<h5 class="card-title">' . $albumTitle . ' | (' . $releaseYear . ')</h5>';
-        $html .= '<p class="card-text"><small class="text-muted">' . $artistName . '</small></p>';
         $html .= '<div class="star-rating">' . $starRating . '</div>';
+        $html .= '<div class="d-flex justify-content-between align-items-center">';
+        $html .= '<h5 class="card-title">' . $albumTitle .  '<span class="card-release-year"> (' . $releaseYear . ')</span></h5>';
+        $html .= '</div>';
+        $html .= '<p class="card-text">' . $artistName . '</p>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
-
+    
         return $html;
     }
-
-
-    // public static function getAlbumCard(array $albumData): string
-    // {
-    //     $albumId = $albumData['album_id'] ?? null;
-    //     $coverImage = isset($albumData['cover_image']) ? htmlspecialchars($albumData['cover_image']) : 'assets/album_covers/default.jpg';
-    //     $albumTitle = isset($albumData['album_title']) ? htmlspecialchars($albumData['album_title']) : 'Unknown Album';
-    //     $artistName = isset($albumData['artist_name']) ? htmlspecialchars($albumData['artist_name']) : 'Unknown Artist';
-    //     $releaseYear = isset($albumData['release_date']) ? htmlspecialchars(date('Y', strtotime($albumData['release_date']))) : 'Unknown Year';
-    //     // $starRating = self::renderStarRating(getAvgRating($albumId));
-    //     $starRating = self::renderStarRating(0);
-
-    //     $html = '<div class="card mb-2">';
-
-    //     if ($albumId) {
-    //         $html .= '<a href="/album/' . htmlspecialchars($albumId) . '">'; // Link to details page
-    //         $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
-    //         $html .= '</a>';
-    //     } else {
-    //         $html .= '<img src="/assets/album_covers/' . $coverImage . '" class="card-img-top" alt="' . $albumTitle . '">';
-    //     }
-
-
-    //     $html .= '<div class="card-body">';
-    //     $html .= '<h5 class="card-title">' . $albumTitle .  ' | (' . $releaseYear .')</h5>';
-    //     $html .= '<p class="card-text"><small class="text-muted">' . $artistName . '</small></p>';
-    //     $html .= '<div class="star-rating">' . $starRating . '</div>'; //added the star rating
-    //     $html .= '</div>';
-    //     $html .= '</div>';
-
-    //     return $html;
-    // }
 
     //In this version this function selects a random album
     private static function getRecommendedAlbum(): ?array
@@ -286,7 +263,7 @@ class Album extends Database
             SELECT
                 Album.album_id AS album_id,
                 Album.album_title AS album_title,
-                Album.release_date AS release_date,
+                YEAR(Album.release_date) AS release_year,
                 Album.cover_image AS cover_image,
                 Artist.artist_name AS artist_name
             FROM
