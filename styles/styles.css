@@ -1,274 +1,379 @@
-:root{
-  --wine-red: #460618; 
-  --ballet-pink:#f4bdc4;
+:root {
+  --wine-red: #460618;
+  --ballet-pink: #f4bdc4;
   --black: #1b090e;
   --white: #f6e4e9;
 }
 
-.sulphur-point-light {
-  font-family: "Sulphur Point", sans-serif;
+@font-face {
+  font-family: 'Sulphur Point';
+  src: url('fonts/SulphurPoint-Light.woff2') format('woff2'),
+    url('fonts/SulphurPoint-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
 
-.sulphur-point-regular {
-  font-family: "Sulphur Point", sans-serif;
+@font-face {
+  font-family: 'Sulphur Point';
+  src: url('fonts/SulphurPoint-Regular.woff2') format('woff2'),
+    url('fonts/SulphurPoint-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
-.sulphur-point-bold {
-  font-family: "Sulphur Point", sans-serif;
+@font-face {
+  font-family: 'Sulphur Point';
+  src: url('fonts/SulphurPoint-Bold.woff2') format('woff2'),
+    url('fonts/SulphurPoint-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
-body,p,a,h1,h2,h3 {
-    margin: 0;
-    font-family: "Sulphur Point", sans-serif;
-  }
-  
-  .navbar {
-    background: var(--wine-red);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--ballet-pink);
-    font-size: 20px;
-    max-height: fit-content; 
-    box-sizing: border-box;
-  }
-
-  .nav-left,
-  .nav-right {
-    display: flex;
-    align-items: center;
-    
-  }
-
-  .nav-left{
-    gap: 1.5rem;
-  }
-
-  .nav-right{
-    gap: 10rem;
-  }
-  
-  .logo {
-    height: 10vh;
-    object-fit: cover;
-  }
-  
-  .website-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--ballet-pink);
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color: var(--ballet-pink);
-    font-weight: 500;
-  }
-  
-  .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-input {
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    width: 45vw;
-    font-size: 14px;
-  }
-  
-  .search-icon {
-    position: absolute;
-    right: 10px;
-    color: var(--wine-red);
-  }
-  
-  .profile-pic {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 1rem;
-  }
-  
-  .banner {
-    width: 100%;
-    height: calc(100vh - 75px);
-    /* Adjust 75px to match navbar height if needed */
-    overflow: hidden;
-  }
-  
-  .banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .about-container {
-    display: flex;
-    height: calc(100vh - 75px);
-    margin: 0;
-  }
-  
-  .about-image {
-    width: 40%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .about-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .about-content {
-    width: 60%;
-    padding: 2rem;
-  }
-  
-  .about-content h1 {
-    margin-bottom: 1.5rem;
-  }
-  
-  .album-recommendation, .about-container, .browse-all {
-    width: 70%;
-    margin: 2rem auto;
-    color: var(--wine-red);
-  }
-  
-  .album-recommendation h1 {
-    margin-bottom: 2rem;
-  }
-  
-  .album-container {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem; 
-  }
-  
-  .album-image {
-    width: 300px; /* Adjust image width for details page */
-    height: 300px; /* Adjust image height for details page */
-    /* Add flex-shrink to prevent image from shrinking */
-    flex-shrink: 0;
-  }
-  
-  .album-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .album-info {
-    padding-top: 0;
-    /* Add flex-grow to allow info to take remaining space */
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align content to the top */
-  }
-  
-  .album-info h3#album-name,
-  .album-info p#artist-name {
-    font-size: 2.5rem;
-    margin: 0 0 0.5rem 0;
-    color: var(--black);
-  }
-  
-  .album-info p#artist-name {
-    font-size: 1.8rem;
-    color: var(--black);
-    margin-top: 0;
-  }
-  
-  .rating {
-    font-size: 1.1rem;
-    margin-bottom: 1rem; /* Add some space below the rating */
-  }
-  
-  .tracklist {
-    font-size: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .tracklist ol {
-    padding-left: 1.5rem;
-  }
-
-  /*Album Details Page Styles */
-  .album-details-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Distribute space between image and info */
-    margin: 20px; /* Add some margin around the whole container */
+body {
+  /* background-color: var(--ballet-pink); */
+  background-color: var(--wine-red);
 }
 
-.album-image-container {
-    flex: 0 0 auto; /* Don't grow, don't shrink, take up defined width */
-    width: 40vw;
-    max-width: 400px; /* Maximum width of 400px */
-    margin-right: 20px; /* Add some margin to the right of the image */
+main {
+  background-color: var(--wine-red);
+  margin: auto
 }
 
-.album-image-container img {
-    width: 100%; /* Image takes up the full width of its container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Optional: Rounded corners for the image */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
+body,
+p,
+a,
+h1,
+h2,
+h3,
+h5, 
+li {
+  margin: 0;
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 700;
 }
 
-.album-info-container {
-    flex: 1; /* Take up remaining available space */
-    display: flex;
-    flex-direction: column;
-    /* Removed width: 60% which caused overlap on small screens */
+
+h1{
+  font-size: 45px;
 }
 
-.album-header {
-    display: flex;
-    align-items: baseline; /* Vertically align title and year */
-    margin-bottom: 10px;
+h3{
+  font-size: 35px;
 }
 
-.album-title {
-    font-size: 24px;
-    margin-right: 10px; /* Space between title and year */
+p, li {
+  font-size: 20px;
 }
 
-.release-year {
-    font-size: 16px;
-    color: #666; /* Greyish color for the year */
+hr {
+  height: 4px;
+  width: 85%;
+  margin: 2rem auto;
+  border: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ballet-pink),
+    transparent
+  );
 }
 
-.star-rating {
-    margin-bottom: 10px;
+
+.home h1 {
+  text-align: center;
 }
 
-.tracklist-container {
-  margin-top: 20px;
+.album-recommendation,
+.about-container,
+.browse-all,
+.album-details-container,
+.top-albums {
+  width: 85%;
+  margin: 0 auto;
+  border: 2rem solid var(--wine-red);
+  color: var(--white);
+  background-color: var(--wine-red);
+}
+
+.navbar {
+  background: var(--wine-red);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--ballet-pink);
+  font-size: 20px;
+  max-height: fit-content;
+  box-sizing: border-box;
+  position: relative; 
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ballet-pink),
+    transparent
+  );
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+
+}
+
+.nav-left {
+  gap: 1.5rem;
+}
+
+.nav-right {
+  gap: 10rem;
+}
+
+.logo {
+  height: 10vh;
+  object-fit: cover;
+}
+
+.website-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ballet-pink);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--ballet-pink);
+  font-weight: 500;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  width: 45vw;
+  font-size: 14px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  color: var(--wine-red);
+}
+
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 1rem;
+}
+
+.banner {
+  width: 100%;
+  height: calc(100vh - 75px);
+  background-image: url('/assets/banners/taylor-swift-red.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* .banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+} */
+
+.about-container {
+  display: flex;
+  height: calc(100vh - 75px);
+  margin: 0;
+}
+
+.about-image {
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.about-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-content {
+  width: 60%;
+  padding: 2rem;
+}
+
+.about-content h1 {
+  margin-bottom: 1.5rem;
+}
+
+.album-recommendation h1 {
+  margin-bottom: 2rem;
+}
+
+.album-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.album-image {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+.album-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-info {
+  padding-top: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.album-info h3#album-name,
+.album-info {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--white);
+}
+
+.artist-genre-container {
+  position: relative; /* Required for pseudo-element positioning */
+}
+
+.artist-genre-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--ballet-pink),
+    transparent
+  );
+}
+
+
+.artist-name{
+  padding:0.5rem 1.5rem;
+}
+
+.artist-image{
+  height:200px;
+  border-radius: 50%;  
+  padding:0.5rem 1.5rem;
+}
+
+.genre-container{
+  display:flex;
+  padding:0.5rem 1.5rem;
+}
+
+.genre-card{
+  color:var(--wine-red);
+  background-color: var(--ballet-pink);
+  border-radius: 40px;
+  margin-right: 0.5rem;
+  padding:5px 10px;
+}
+
+.rating {
+  font-size: 1.1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .tracklist {
-    list-style-type: decimal; /* Use numbers for the track list */
-    padding-left: 20px; /* Add padding to the left to indent the list */
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.tracklist ol {
+  padding-left: 1.5rem;
+}
+
+.album-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.album-image-container {
+  flex: 0 0 auto;
+  width: 40vw;
+  max-width: 400px;
+  margin-right: 20px;
+}
+
+.album-image-container img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.album-info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.album-header {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.album-title {
+  margin-right: 10px;
+
+}
+
+.release-year {
+  font-size: 32px;
+  color: var(--white);
+  opacity:75%;
+}
+
+.tracklist {
+  list-style-type: decimal;
 }
 
 .song-name {
-    font-size: 16px; /* Adjust font size as needed */
-    line-height: 1.5; /* Add line height for better readability */
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 
-  /* Album Details Page Specific Styles
+/* Album Details Page Specific Styles
   .album-details-page {
     padding: 2rem;
   }
@@ -333,133 +438,130 @@ body,p,a,h1,h2,h3 {
     margin-bottom: 1rem;
   }
    */
-  .profile-container {
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .profile-container .dropdown-content {
-    display: block;
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: var(--wine-red);
-    min-width: 160px;
-    margin-top: 5px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  /* Fade and slide-down effect */
-  .profile-container:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  
-  /* Fade hover on links */
-  .profile-container .dropdown-content a {
-    padding-top: 15px;
-    color: var(--ballet-pink);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .profile-container .dropdown-content a:hover {
-    background-color: var(--ballet-pink);
-    color: var(--wine-red);
-  }
-  
-  /* Login/Signup Styles */
-  .login-container,
-  .signup-container {
-    max-width: 40vw;
-    min-height: 70vh;
-    margin: 50px auto;
-    /* Centers the box vertically */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: var(--white);
-    background-color: var(--wine-red);
-  }
-  
-  .input-group {
-    margin-bottom: 15px;
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--ballet-pink);
-    border-radius: 20px;
-  }
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
 
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-  }
+.profile-container .dropdown-content {
+  display: block;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--wine-red);
+  min-width: 160px;
+  margin-top: 5px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-  .button-group button{
-    border-radius: 32px;
-    padding: 10px 50px;
-  }
+/* Fade and slide-down effect */
+.profile-container:hover .dropdown-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-  footer {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
-    padding: 5px;
-    background-color: var(--wine-red); 
-    border-top: 1px solid #eee; 
-  }
-  
-  .social-buttons {
-    display: flex; 
-    gap: 15px;
-    margin-bottom: 10px; 
-  }
-  
-  .social-button {
-    background-color: var(--wine-red);
-    color: var(--ballet-pink); 
-    border: none;
-    border-radius: 50%;
-    width: 40px; 
-    height: 40px;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .social-button:hover {
-    background-color: var(--ballet-pink);
-    color: var(--wine-red);
-  }
+/* Fade hover on links */
+.profile-container .dropdown-content a {
+  padding-top: 15px;
+  color: var(--ballet-pink);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-  
-  .copyright {
-    font-size: 0.9rem;
-    color: var(--ballet-pink);
-    margin-top: 0;
-  }
+.profile-container .dropdown-content a:hover {
+  background-color: var(--ballet-pink);
+  color: var(--wine-red);
+}
 
-  /* Profile Page Styles */
+/* Login/Signup Styles */
+.login-container,
+.signup-container {
+  max-width: 40vw;
+  min-height: 70vh;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--white);
+  background-color: var(--wine-red);
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--ballet-pink);
+  border-radius: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group button {
+  border-radius: 32px;
+  padding: 10px 50px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  background-color: var(--wine-red);
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.social-button {
+  background-color: var(--wine-red);
+  color: var(--ballet-pink);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social-button:hover {
+  background-color: var(--ballet-pink);
+  color: var(--wine-red);
+}
+
+
+.copyright {
+  font-size: 0.9rem;
+  color: var(--ballet-pink);
+  margin-top: 0;
+}
+
+/* Profile Page Styles */
 .profile-banner {
   width: 100%;
   height: 200px;
@@ -485,7 +587,7 @@ body,p,a,h1,h2,h3 {
   padding: 2rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -512,7 +614,8 @@ body,p,a,h1,h2,h3 {
   margin-top: 1rem;
 }
 
-.edit-btn, .logout-btn {
+.edit-btn,
+.logout-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
@@ -531,9 +634,9 @@ body,p,a,h1,h2,h3 {
 
 .profile-tabs {
   flex: 2;
-  background: white;
+  background: var(--white);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
 }
 
@@ -563,4 +666,65 @@ body,p,a,h1,h2,h3 {
 
 .tab-content.active {
   display: block;
+}
+
+.star-rating {
+  font-size: 1.5em;
+  /* margin-bottom: 10px; */
+  display: inline-flex;
+  direction: ltr;
+  font-weight:300;
+}
+
+.star-rating .full-star {
+  color: var(--ballet-pink);
+  font-weight:300;
+}
+
+.star-rating .star {
+  font-size: 1em;
+  color: var(--ballet-pink);
+  cursor: pointer;
+  font-weight:300;
+  /* transition: color 0.2s; */
+  /* Smooth color transition on hover/active */
+  /* user-select: none; */
+  /* Prevent text selection */
+}
+
+.review-rating .star {
+  font-size: 1em;
+  color: var(--ballet-pink);
+  cursor: pointer;
+  transition: color 0.2s;
+  /* user-select: none; */
+}
+
+.review-rating .star:hover,
+.review-rating .star:active {
+  color: var(--ballet-pink);
+  /* Change color on hover/active (full stars) */
+}
+
+
+
+.card{
+  background-color: transparent;
+  color: var(--white);
+
+}
+
+.card-title{
+  font-size: 24px;
+}
+
+.card-text {
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ballet-pink);
+  padding-bottom: 1.25rem;
+}
+
+.card-release-year {
+  opacity:75%;
 }
