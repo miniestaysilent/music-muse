@@ -1,6 +1,7 @@
 :root {
   --wine-red: #460618;
   --ballet-pink: #f4bdc4;
+  --dark-pink: #612936;
   --black: #1b090e;
   --white: #faedf1;
 }
@@ -289,10 +290,22 @@ hr {
   padding:0.5rem 1.5rem;
 }
 
-.artist-image{
-  height:200px;
-  border-radius: 50%;  
-  padding:0.5rem 1.5rem;
+.artist-image {
+  margin:15px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; 
+  overflow: hidden; 
+  position: relative;
+}
+
+.artist-image img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .genre-container{
@@ -372,6 +385,7 @@ hr {
   font-size: 16px;
   line-height: 1.5;
 }
+
 
 
 /* Album Details Page Specific Styles
@@ -569,6 +583,22 @@ footer {
   text-align: center;
   padding: 5px;
   background-color: var(--wine-red);
+  position: relative; /* Needed for positioning the ::before element */
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ballet-pink),
+    transparent
+  );
 }
 
 .social-buttons {
@@ -627,8 +657,9 @@ footer {
 
 .profile-info {
   flex: 1;
-  padding: 2rem;
-  background: white;
+  color: var(--white);
+  padding: 2rem;  
+  background: var(--dark-pink);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -659,25 +690,28 @@ footer {
 
 .edit-btn,
 .logout-btn {
+  background: var(--wine-red);
+  color: white;
   padding: 0.5rem 1rem;
-  border: none;
+  border: 2px solid var(--ballet-pink);
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease; /* Added transition */
 }
 
-.edit-btn {
-  background: #4CAF50;
-  color: white;
+.edit-btn:hover,
+.logout-btn:hover {
+  background-color: var(--ballet-pink);
+  color: var(--wine-red);
+  font-weight: bold; /* Make text bold on hover */
 }
 
-.logout-btn {
-  background: #f44336;
-  color: white;
-}
+
 
 .profile-tabs {
   flex: 2;
-  background: var(--white);
+  background: var(--dark-pink);
+  color: var(--white);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -694,12 +728,29 @@ footer {
   border: none;
   background: none;
   cursor: pointer;
+  color: var(--ballet-pink);
   border-bottom: 2px solid transparent;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
 .tab-btn.active {
-  border-bottom: 2px solid #4CAF50;
-  color: #4CAF50;
+  color: white;
+}
+
+.tab-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--ballet-pink);
+  transition: width 0.3s ease;
+}
+
+.tab-btn.active::after {
+  width: 100%;
 }
 
 .tab-content {
@@ -713,7 +764,6 @@ footer {
 
 .star-rating {
   font-size: 1.5em;
-  /* margin-bottom: 10px; */
   display: inline-flex;
   direction: ltr;
   font-weight:300;
@@ -750,7 +800,6 @@ footer {
 }
 
 
-
 .card{
   background-color: transparent;
   color: var(--white);
@@ -770,4 +819,22 @@ footer {
 
 .card-release-year {
   opacity:75%;
+}
+
+ img.card-img-top, .album-image {
+  transition: transform 0.3s ease;
+}
+
+.card a:hover img.card-img-top, .album-image:hover {
+  transform: scale(1.05);
+}
+
+.tracklist {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-rows: min-content;
+  grid-template-rows: repeat(7, auto);  
+  gap: 0.4rem 0.6rem;
+  padding-left: 1rem;
+  min-width: 20vw;
 }
