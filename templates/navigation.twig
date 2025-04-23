@@ -37,14 +37,19 @@
                <i class="fas fa-search search-icon"></i>
             </button>
         </form>
+        <!-- if the user is logged in displays their profile picture, username and dropdown menu -->
+        {% if loggedin == true %}
         <div class="profile-container">
             <img src="assets/icons/profile-icon.jpg" alt="Profile" class="profile-pic">
             <div class="dropdown-content">
                 <a href="profile.php">My Profile</a>
                 <a href="#">My Reviews</a>
                 <a href="#">Favorites</a>
-                <a href="login.php">Log Out</a>
+                <a href="logout.php">Log Out</a>
             </div>
         </div>
+        {% else %}
+        <a href="login.php" class="nav-link">Log In</a>
+        {% endif %}
     </div>
 </nav>

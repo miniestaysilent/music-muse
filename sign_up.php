@@ -1,4 +1,5 @@
 <?php
+
 use Dotenv\Dotenv;
 
 require_once 'vendor/autoload.php'; // Ensure Composer autoloader is included
@@ -13,19 +14,19 @@ use TeamCherry\MusicMuse\Account;
 
 // Create app from App class
 $app = new App(); // This will now have access to the loaded environment variables
-$site_name = $app -> site_name;
+$site_name = $app->site_name;
 
 // Create data variables
-$page_title = $site_name . "|". "Sign Up";
+$page_title = $site_name . "|" . "Sign Up";
 $signup_errors = [];
 
 // Loading the twig template
 $loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig = new \Twig\Environment( $loader );
-$template = $twig -> load( 'sign_up.twig' );
+$twig = new \Twig\Environment($loader);
+$template = $twig->load('sign_up.twig');
 
 // Checking for form submmission via POST
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     echo "Post request received.";
     //Store username in a variable
     $username = $_POST['username'];
@@ -63,7 +64,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $account->create($username, $email, $password);
         if ($account->response['success'] == true) {
             // Account has been created
-            $signup_success = true; // Set a success variable
+            $_SESSION['user_id'] = $user['id']; 
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['username'] = $user['username'];
+            
+            $signup_success = true;
+
+            header("Location: index.php"); // Redirect to homepage 
+            exit();
         } else {
             // Error occurred during account creation
             $signup_errors = $account->response['errors'];
@@ -75,9 +83,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 }
 
 // Render the output
-echo $template -> render( [
+echo $template->render([
     'title' => $page_title,
     'website_name' => $site_name,
     'errors' => $signup_errors
-] );
-?>
+]);

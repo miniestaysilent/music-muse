@@ -28,9 +28,12 @@
 
     $page_title = "$site_name | Home";
 
+    $isauthenticated = false;
 
+    if(isset($_SESSION['username'])){
+        $isauthenticated = true;  
+    }
 
-    // Album model
 
     $albumModel = new Album();
 

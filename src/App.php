@@ -4,6 +4,7 @@ namespace TeamCherry\MusicMuse;
 
 use Dotenv\Dotenv;
 use \Exception;
+use TeamCherry\MusicMuse\SessionManager;
 
 class App{
     protected $config;
@@ -12,7 +13,8 @@ class App{
     # Create Constructor
     public function __construct()
     {
-        
+        $this-> loadConfig();
+        SessionManager::init();
     }
 
     private function loadConfig(){

@@ -1,8 +1,9 @@
 <?php
+
 use Dotenv\Dotenv;
 use TeamCherry\MusicMuse\App;
 use TeamCherry\MusicMuse\Account;
-use TeamCherry\MusicMuse\SessionManager;
+use TeamCherry\MusicMuse\SessionManager; // You weren't using this
 
 require_once "vendor/autoload.php";
 
@@ -10,8 +11,8 @@ require_once "vendor/autoload.php";
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Initialize session
-// SessionManager::init();
+// Initialize session.  This is crucial and should be done *before* any output or session variable manipulation.
+session_start();
 
 // Create app instance
 $app = new App();
@@ -48,12 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             // Verify the password
             if (password_verify($password, $user['password_hashed'])) {
-                // Password is correct, set session and redirect
-                $_SESSION['user_id'] = $user['id']; // Assuming your user table has an 'id'
+                // Password is correct
+                $_SESSION['user_id'] = $user['id']; 
                 $_SESSION['email'] = $user['email'];
-                $login_success = true;
-                // header("Location: /"); // Redirect to homepage or dashboard
-                exit();
+                $_SESSION['username'] = $user['username'];
+                $login_success = true; 
+
+                // header("Location: index.php"); // Redirect to homepage 
+                exit(); 
             } else {
                 // Incorrect password
                 $login_error = "Incorrect password.";
@@ -72,5 +75,3 @@ echo $template->render([
     'login_error' => $login_error,
     'signup_success' => $signup_success,
 ]);
-
-?>
