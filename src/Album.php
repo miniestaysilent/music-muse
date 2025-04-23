@@ -1,5 +1,4 @@
 <?php
-
 namespace TeamCherry\MusicMuse;
 
 use Exception;
@@ -64,29 +63,7 @@ class Album extends Database
         return 'assets/album_covers/default.png'; // Default
     }
 
-    private static function getTrackList(int $album_id): array
-    {
-        $instance = new self();
-        $track_query = "
-            SELECT
-                track_name AS name
-            FROM
-                `tracks`
-            WHERE
-                album_id = ?
-            ORDER BY
-                track_number ASC
-        ";
-        $statement = $instance->connection->prepare($track_query);
-        $statement->bind_param("i", $album_id);
-        $statement->execute();
-        $result = $statement->get_result();
-        $tracks = [];
-        while ($row = $result->fetch_assoc()) {
-            $tracks[] = $row;
-        }
-        return $tracks;
-    }
+
 
     // Gets the Average rating
     public function getAvgRating(int $album_id): ?float
@@ -221,41 +198,18 @@ class Album extends Database
     }
 
     //In this version this function selects a random album
-    private static function getRecommendedAlbum(): ?array
-    {
-        $instance = new self();
-        $count_query = "SELECT COUNT(*) AS total FROM Album WHERE visible = 1";
-        $count_statement = $instance->connection->prepare($count_query);
-        $count_statement->execute();
-        $count_result = $count_statement->get_result();
-        $total_albums = $count_result->fetch_assoc()['total'];
-
-        if ($total_albums > 0) {
-            $random_offset = rand(0, $total_albums - 1);
-            $random_album_query = "
-                SELECT
-                    Album.album_id AS album_id,
-                    Album.album_title AS album_title,
-                    Album.artist_id AS artist_id,
-                    Artist.artist_name AS artist_name,
-                    Album.release_date AS release_date,
-                    Album.cover_image AS cover_image
-                FROM
-                    `Album`
-                INNER JOIN Artist ON Album.artist_id = Artist.artist_id
-                WHERE Album.visible = 1
-                LIMIT 1 OFFSET ?
-            ";
-            $statement = $instance->connection->prepare($random_album_query);
-            $statement->bind_param("i", $random_offset);
-            $statement->execute();
-            $result = $statement->get_result();
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc(); // Returns an array with all necessary album details
-            }
-        }
-        return null;
+    public static function getRandomAlbumId(): ?int
+{
+    $instance = new self();
+    $query = "SELECT album_id FROM Album WHERE visible = 1 ORDER BY RAND() LIMIT 1";
+    $result = $instance->connection->query($query);
+    
+    if ($result && $row = $result->fetch_assoc()) {
+        return (int) $row['album_id'];
     }
+
+    return null;
+}
 
     public function getDetail(int $albumId): ?array
     {
@@ -285,6 +239,45 @@ class Album extends Database
             return null;
         }
     }
+    public function searchAlbums(string $searchTerm): array
+    {
+        $query = "
+            SELECT
+                Album.album_id AS album_id,
+                Album.album_title AS album_title,
+                Album.artist_id AS artist_id,
+                Artist.artist_name AS artist_name,
+                Album.release_date AS release_date,
+                Album.cover_image AS cover_image
+            FROM
+                Album
+            INNER JOIN Artist ON Album.artist_id = Artist.artist_id
+            WHERE
+                Album.album_title LIKE ?
+            ORDER BY
+                Album.album_title ASC
+        ";
+        $searchTerm = "%" . $searchTerm . "%"; 
 
-    // Add function to get an array of the genres
+        try {
+            $statement = $this->connection->prepare($query);
+            $statement->bind_param("s", $searchTerm);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            if ($result && $result->num_rows > 0) {
+                $albums = [];
+                while ($row = $result->fetch_assoc()) {
+                    $albums[] = $row;
+                }
+                return $albums;
+            } else {
+                return []; // Return an empty array if no albums are found
+            }
+        } catch (Exception $e) {
+            error_log("Database error in Album->searchAlbums: " . $e->getMessage());
+            throw $e; // Re-throw the exception for the caller to handle
+        }
+    }
+    
 }

@@ -70,7 +70,7 @@ echo $template->render([
     'website_name'   => $site_name,
     'album'          => $albumDetails,
     'tracks'         => $tracks,
-    'artist' => $artistDetails, 
+    'artist'         => $artistDetails, 
     'genres'         => $genres,
     'rating_html'    => $ratingHtml,
 ]);

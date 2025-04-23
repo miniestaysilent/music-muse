@@ -27,36 +27,32 @@
             <h1>Today's Album Recommendation</h1>
             <div class="album-container">
                 <div class="album-image">
-                    <img src="assets/album_covers/default.png" alt="Album Cover">
+                    <a href="/details.php?id={{ recommended_album.album_id }}">
+                        <img src="assets/album_covers/{{ recommended_album.cover_image }}" alt="Album Cover">
+                    </a>
                 </div>
+                
                 <div class="album-info">
                     <h3 id="album-rec-name">
-                        Album Name
+                        {{ recommended_album.album_title }}
+                        <span id="album-rec-year">({{ recommended_album.release_year }})</span>
                     </h3>
-                    <!-- <p id="artist-rec-name">{{ recommended_album.artist }}</p> {#Pass artist data #} -->
-                    <!-- <div class="rating">
-                        <div data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="{{ recommended_album.rating }}">
-                            <span class="rating-star"></span>
-                            <span class="rating-star"></span>
-                            <span class="rating-star"></span>
-                            <span class="rating-star"></span>
-                            <span class="rating-star"></span>
-                        </div>
-                    </div> -->
-                    <div class="tracklist-container">
-                        <ol class="tracklist">
-                            {% if tracks %}
-                            {% for track in tracks %}
-                            <li class="song-name">{{ track.song_title }}</li>
-                            {% endfor %}
-                            {% else %}
-                            <!-- If tracks cant be loaded for some reason -->
-                            <li>No tracks available</li>
-                            {% endif %}
-                        </ol>
-                    </div>
+                    <p id="artist-rec-name">{{ recommended_album.artist_name }}</p>
+            
+                    <ol class="tracklist">
+                        {% if tracks %}
+                          {% for track in tracks %}
+                          <li class="song-name">{{ track.song_title }}</li>
+                          {% endfor %}
+                        {% else %}
+                          <li>No tracks available</li>
+                        {% endif %}
+                      </ol>
+                      
+                    
                 </div>
             </div>
+            
         </div>
         <hr>
         <div class="top-albums">

@@ -49,7 +49,10 @@
             </div>
             <div class="artist-genre-container">
                 <div class="artist-info">
-                    <img class="artist-image" src="/assets/artists/{{ artist.artist_image }}">
+                    <div class="artist-image">
+                        <img src="/assets/artists/{{ artist.artist_image }}">
+                    </div>
+                    
                     <h2 class="artist-name">{{ artist.artist_name }}</h2>
                 </div>
                 <div class="genre-container">
@@ -65,9 +68,21 @@
         </div>
         <div class="reviews-container">
             <hr>
-            <h1>Reviews</h1>
+            <h1 class="review-heading">Reviews</h1>
             <form class="review-form" method="post" action="/submit_review.php">
-              <label for="user-review">Leave a review:</label>
+                <label for="user-review">Leave a review:</label>
+                <div class="review-rating">
+                    <label for="star5" class="star">&#9734;</label>
+                    <input type="radio" id="star5" name="rating" value="5" style="display: none;">
+                    <label for="star4" class="star">&#9734;</label>
+                    <input type="radio" id="star4" name="rating" value="4" style="display: none;">
+                    <label for="star3" class="star">&#9734;</label>
+                    <input type="radio" id="star3" name="rating" value="3" style="display: none;">
+                    <label for="star2" class="star">&#9734;</label>
+                    <input type="radio" id="star2" name="rating" value="2" style="display: none;">
+                    <label for="star1" class="star">&#9734;</label>
+                    <input type="radio" id="star1" name="rating" value="1" style="display: none;">
+                  </div>
               <textarea id="user-review" name="review" placeholder="Write your thoughts..." required></textarea>
               <button type="submit">Submit</button>
             </form>
