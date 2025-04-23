@@ -514,11 +514,11 @@ hr {
   min-height: 70vh;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid var(--white);
+  /* border: 1px solid var(--white); */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: var(--white);
-  background-color: var(--wine-red);
+  background-color: var(--dark-pink);
 }
 
 .input-group {
@@ -534,7 +534,10 @@ hr {
   width: 100%;
   padding: 8px;
   border: 1px solid var(--ballet-pink);
-  border-radius: 20px;
+}
+
+.checkbox-group {
+  margin-bottom: 2rem;
 }
 
 .button-group {
@@ -659,7 +662,9 @@ footer::before {
 }
 
 .edit-btn,
-.logout-btn {
+.logout-btn,
+.login-btn,
+.sign-up-btn {
   background: var(--wine-red);
   color: white;
   padding: 0.5rem 1rem;
